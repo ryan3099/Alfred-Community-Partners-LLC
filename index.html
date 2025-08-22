@@ -1,67 +1,226 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CAP Garland, LLC</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alfred Community Partners, LLC</title>
+  <meta name="description" content="Alfred Community Partners — community language centre in Sherman Oaks. Classes, tutoring, and cultural programs."/>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f0f0f0;
-      color: #333;
+    :root{
+      --primary:#E5252A;   /* Red */
+      --accent:#17191C;    /* Dark grey (foncé) */
+      --white:#ffffff;
+      --muted:#5d6672;
+      --card:#ffffff;
+      --bg:#ffffff;
     }
-    header {
-      background-color: #003366;
-      color: white;
-      padding: 30px 20px;
-      text-align: center;
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:#0b0b0b;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+
+    /* Header */
+    header{background:var(--accent); color:#fff; position:sticky; top:0; z-index:10; box-shadow:0 6px 18px rgba(0,0,0,.08)}
+    .topbar{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 24px}
+    .brand{font-weight:900; letter-spacing:.3px}
+    nav a{display:inline-block; padding:10px 14px; border-radius:12px; color:#ffd6d7; font-weight:700}
+    nav a:hover{background:rgba(255,255,255,.12)}
+    .cta-btn{background:var(--primary); color:#fff; padding:10px 14px; border-radius:12px; font-weight:800}
+
+    /* Hero (animated card) */
+    .hero-wrap{background:linear-gradient(180deg,#ffffff,#fff1f1); padding:42px 24px}
+    .hero-card{
+      background:var(--card); border:1px solid rgba(0,0,0,.06); border-radius:22px;
+      box-shadow:0 30px 60px rgba(0,0,0,.12); padding:28px;
+      display:grid; grid-template-columns:1.15fr .85fr; gap:22px; overflow:hidden;
+      transform:translateY(24px); opacity:0; animation:cardIn .9s ease-out .15s forwards;
     }
-    section {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-    h1, h2 {
-      color: #003366;
-    }
-    .contact {
-      background: #fff;
-      padding: 20px;
-      border-left: 5px solid #003366;
-      margin-top: 30px;
-    }
-    footer {
-      background-color: #003366;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 50px;
+    @keyframes cardIn{to{transform:translateY(0);opacity:1}}
+    .hero-badge{display:inline-flex; align-items:center; gap:10px; background:var(--accent); color:#ffd6d7; padding:6px 12px; border-radius:999px; font-size:.9rem; font-weight:800}
+    .hero-title{font-size:clamp(26px,4vw,42px); line-height:1.15; margin:14px 0 10px; font-weight:900; color:#0b0b0b}
+    .hero-title .grad{background:linear-gradient(90deg,var(--primary),#ff6b70); -webkit-background-clip:text; color:transparent}
+    .hero-sub{font-size:1.02rem; color:#333}
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:14px}
+    .btn{border:2px solid var(--accent); color:#fff; background:var(--accent); padding:12px 18px; border-radius:14px; font-weight:800}
+    .btn:hover{transform:translateY(-1px); box-shadow:0 8px 16px rgba(0,0,0,.15)}
+    .btn.secondary{background:#fff; color:var(--accent)}
+    .hero-media{border-radius:18px; overflow:hidden; aspect-ratio:4/3; background:#f7f7f7;
+      display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:8px}
+    .hero-media img{object-fit:cover; width:100%; height:100%}
+
+    /* Sections */
+    section{padding:56px 24px}
+    section h2{font-size:clamp(22px,3vw,32px); margin:0 0 14px; font-weight:900}
+    .muted{color:var(--muted)}
+
+    /* Cards */
+    .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px}
+    .card{border:1px solid rgba(0,0,0,.06); border-radius:16px; padding:16px; background:#fff; box-shadow:0 8px 24px rgba(0,0,0,.06);
+      transform:translateY(14px); opacity:0}
+    .card.reveal{animation:reveal .7s ease-out forwards}
+    @keyframes reveal{to{transform:translateY(0); opacity:1}}
+
+    /* Gallery */
+    .gallery{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+    .gallery img{border-radius:14px; aspect-ratio:4/3; object-fit:cover}
+
+    /* Formula */
+    .formula{border-left:6px solid var(--primary); background:#fff4f5; padding:16px 18px; border-radius:12px}
+    .formula ol{margin:0; padding-left:18px}
+    .formula li{margin:8px 0}
+
+    /* Contact */
+    .contact-box{background:var(--primary); color:#fff; border-radius:18px; padding:20px; display:grid; gap:8px; border:1px solid rgba(0,0,0,.12)}
+    .contact-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
+    .contact-actions a{display:inline-block; background:var(--accent); color:#fff; padding:10px 14px; border-radius:12px; font-weight:800}
+
+    footer{background:#0f1114; color:#ffd6d7; padding:18px; text-align:center; font-weight:700}
+
+    @media (max-width:820px){
+      .hero-card{grid-template-columns:1fr; padding:20px}
+      .gallery{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body>
+
+  <!-- Header -->
   <header>
-    <h1>CAP Garland, LLC</h1>
-    <p>Private Investment Fund</p>
+    <div class="topbar container">
+      <div class="brand">Alfred Community Partners, LLC</div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#services">Programs</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#formula">Our Formula</a>
+        <a href="#contact" class="cta-btn">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <section>
-    <h2>About Us</h2>
-    <p>CAP Garland, LLC is a Washington-based private investment fund focused on delivering value through diversified investment strategies.</p>
+  <!-- HERO -->
+  <div class="hero-wrap">
+    <div class="container">
+      <div class="hero-card">
+        <div>
+          <span class="hero-badge">Community Language Centre</span>
+          <h1 class="hero-title">Learn together.<br/><span class="grad">Connect deeper.</span></h1>
+          <p class="hero-sub">Classes, tutoring, and cultural programs that help neighbors communicate, study, and thrive—right here in Sherman Oaks.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#services">Explore Programs</a>
+            <a class="btn secondary" href="#contact">Get in Touch</a>
+          </div>
+          <p class="muted" style="margin-top:10px;">COLBATH AVE., SHERMAN OAKS, CA 91403 • +1 448 231 6074 • contact@acop.shop</p>
+        </div>
+        <div class="hero-media">
+          <img src="https://payment.elitestudent.ru/images/Edgware-Academy-1.jpg" alt="Language classroom">
+          <img src="https://avatars.mds.yandex.net/get-altay/1579247/2a0000016ee150b8d678dbd714d7e5a2ad48/XXL_height" alt="Community event">
+          <img src="https://avatars.mds.yandex.net/get-altay/216588/2a0000015b1831c13800a00c3a7e1e35c381/XXL" alt="Library study">
+          <img src="https://al-talib.org/wp-content/uploads/2015/12/5920002891_a019fe23c8_o1.png" alt="Cultural program">
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- About -->
+  <section id="about" class="container">
+    <h2>About Us</h2>
+    <p class="muted">
+      Alfred Community Partners supports multilingual communities with practical classes and welcoming spaces.
+      We focus on language confidence, academic support, and cultural exchange for all ages.
+    </p>
+    <div class="cards" style="margin-top:12px">
+      <article class="card reveal" style="animation-delay:.00s"><strong>Accessible:</strong> Sliding-scale options and small groups.</article>
+      <article class="card reveal" style="animation-delay:.08s"><strong>Practical:</strong> Conversation-first lessons and real-life tasks.</article>
+      <article class="card reveal" style="animation-delay:.16s"><strong>Supportive:</strong> Tutoring, test prep, and study clubs.</article>
+      <article class="card reveal" style="animation-delay:.24s"><strong>Community:</strong> Events, guest talks, and volunteer mentors.</article>
+    </div>
+  </section>
+
+  <!-- Programs / Services -->
+  <section id="services" class="container">
+    <h2>Programs</h2>
+    <div class="cards">
+      <article class="card reveal" style="animation-delay:.00s">
+        <h3>Adult Language Classes</h3>
+        <p>Evening & weekend sessions focused on conversation, work, and daily life.</p>
+      </article>
+      <article class="card reveal" style="animation-delay:.08s">
+        <h3>Youth Tutoring</h3>
+        <p>Homework help, reading support, and exam preparation in a friendly setting.</p>
+      </article>
+      <article class="card reveal" style="animation-delay:.16s">
+        <h3>Citizenship & ESL</h3>
+        <p>ESL pathways and civics prep with practice interviews and forms guidance.</p>
+      </article>
+      <article class="card reveal" style="animation-delay:.24s">
+        <h3>Cultural Programs</h3>
+        <p>Conversation cafes, film nights, and community celebrations.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="container">
+    <h2>Gallery</h2>
+    <div class="gallery">
+      <img src="https://payment.elitestudent.ru/images/Edgware-Academy-1.jpg" alt="Classroom">
+      <img src="https://avatars.mds.yandex.net/get-altay/1579247/2a0000016ee150b8d678dbd714d7e5a2ad48/XXL_height" alt="Community">
+      <img src="https://avatars.mds.yandex.net/get-altay/216588/2a0000015b1831c13800a00c3a7e1e35c381/XXL" alt="Library">
+      <img src="https://al-talib.org/wp-content/uploads/2015/12/5920002891_a019fe23c8_o1.png" alt="Culture">
+    </div>
+  </section>
+
+  <!-- Our Formula (10 Key Points) — Community Language Centre -->
+  <section id="formula" class="container">
+    <h2>Our Formula (10 Key Points)</h2>
+    <div class="formula">
+      <ol>
+        <li><strong>Needs First:</strong> Assess goals and levels up front.</li>
+        <li><strong>Small Groups:</strong> Conversation-heavy sessions for confidence.</li>
+        <li><strong>Clear Pathways:</strong> Levels, milestones, and progress checks.</li>
+        <li><strong>Real Context:</strong> Lessons built around daily tasks and work.</li>
+        <li><strong>Resources:</strong> Printables, apps, and bilingual supports.</li>
+        <li><strong>Qualified Tutors:</strong> Trained instructors and vetted volunteers.</li>
+        <li><strong>Welcoming Space:</strong> Safe, inclusive, and family-friendly.</li>
+        <li><strong>Community Events:</strong> Mixers, language exchanges, and talks.</li>
+        <li><strong>Accessibility:</strong> Sliding scale, scholarships, and outreach.</li>
+        <li><strong>Feedback Loop:</strong> Surveys and curriculum updates each term.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="container">
     <h2>Contact</h2>
-    <div class="contact">
-      <p><strong>Address:</strong> 915 W 2nd Ave, Spokane, WA 99201</p>
-      <p><strong>Email:</strong> <a href="mailto:ryanberg@capgarland.shop">ryanberg@capgarland.shop</a></p>
-      <p><strong>Phone:</strong> (509) 822-3850</p>
+    <div class="contact-box">
+      <div><strong>Company:</strong> Alfred Community Partners, LLC</div>
+      <div><strong>Domain:</strong> Community Language Centre</div>
+      <div><strong>Address:</strong> COLBATH AVE., SHERMAN OAKS, CA 91403</div>
+      <div><strong>Phone:</strong> +1 448 231 6074</div>
+      <div><strong>Email:</strong> contact@acop.shop</div>
+      <div class="contact-actions">
+        <a href="mailto:contact@acop.shop?subject=Inquiry%20-%20Alfred%20Community%20Partners" target="_blank" rel="noopener">Email Us</a>
+        <a href="tel:+14482316074">Call Now</a>
+        <a href="https://wa.me/14482316074" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=COLBATH+AVE,+SHERMAN+OAKS,+CA+91403" target="_blank" rel="noopener">Open Map</a>
+      </div>
     </div>
   </section>
 
   <footer>
-    &copy; 2025 CAP Garland, LLC. All rights reserved.
+    © 2025 Alfred Community Partners, LLC — All rights reserved
   </footer>
+
+  <script>
+    // Reveal-on-scroll for cards
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('reveal'); observer.unobserve(e.target); }
+      })
+    }, {threshold:.15});
+    document.querySelectorAll('.card').forEach(el=>observer.observe(el));
+  </script>
 </body>
 </html>
